@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head') %>
+  <%- include('../partials/head') %>
 
-<body>
-    <div id="wrapper">
-        <%- include('../partials/header') %>
-        <%- include('../partials/navigation') %>
-        
-        <main>
-            <%- body %>
-        </main>
-        <%- include('../partials/footer') %>
+  <body>
+    <div id="for-large">
+      <div id="background">
+        <img src="/images/site/small_check.jpg" alt="" />
+      </div>
+      <div id="child">
+        <div id="wrapper">
+          <%- include('../partials/header') %> <%-
+          include('../partials/navigation') %>
+
+          <main><%- body %></main>
+          <%- include('../partials/footer') %>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
