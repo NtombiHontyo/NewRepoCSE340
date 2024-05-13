@@ -12,7 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./contollers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require('./utilities/index')
+const utilities = require('./utilities/')
 
 
 /* ***********************
@@ -43,7 +43,7 @@ app.use(async (err, req, res, next) => {
   if(err.status == 404) { message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
-    message: err.message,
+    message,
     nav
   })
 })
