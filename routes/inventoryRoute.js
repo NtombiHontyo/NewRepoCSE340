@@ -8,4 +8,5 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 //Route to build detail view for each vehicle
 router.get("/detail/:vehicle_inv_id", invController.buildByInvId)
 
+
 module.exports = router
