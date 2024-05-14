@@ -101,9 +101,29 @@ h1 {
 .upgrades a {
   text-align: center;
 }
+#inline {
+  display: inline-block;
+}
+#inlines {
+  display: inline-block;
+}
+#inliness {
+  display: inline-block;
+}
+.datailimages { 
+  width: 80% ;
+  margin-left: 60px;
+}
+.price {
+  background-color: aliceblue;
+  padding: 10px;
+}
 @media only screen and (min-width: 64rem) {
   #background {
     display: block;
+  }
+  #background img{ 
+    width: 100%;
   }
   #for-large {
     position: relative;
@@ -128,6 +148,14 @@ h1 {
     flex-direction: row-reverse;
     justify-content: space-between;
   }
+  .veh_det {
+    display: flex;
+  }
+  .align { 
+    align-content: center;
+    margin-right: 30px;
+  }
+  
   
   
 }

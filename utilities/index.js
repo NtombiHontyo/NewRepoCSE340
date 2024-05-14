@@ -6,7 +6,7 @@ const Util = {}
 ************************ */
 Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications()
-    let list = "<ul>"
+    let list = "<ul id='nav_ul'>"
     list += '<li><a href="/" title="Home page">Home</a></li>'
     data.rows.forEach((row) => {
         list += "<li>"
@@ -25,6 +25,7 @@ Util.getNav = async function (req, res, next) {
 }
 
 
+
 /* *************************** 
  * Build the classification view HTML
  * ************************* */
@@ -36,7 +37,7 @@ Util.buildClassificationGrid = async function(data){
             grid += '<li>'
         grid += '<a href="../../inv/detail/'+ vehicle.inv_id
         + '" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model
-        + 'detail"><img src="' + vehicle.inv_thumbnail
+        + ' detail"><img src="' + vehicle.inv_thumbnail
         +'" alt="Image of ' + vehicle.inv_make + ' '+ vehicle.inv_model
         +' on CSE Motors" /></a>'
         grid += '<div class="namePrice">'
@@ -56,6 +57,45 @@ Util.buildClassificationGrid = async function(data){
         grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+}
+
+Util.buildDetailPage = async function(data){
+    let detail
+    data.rows.forEach((row) => {
+        detail = '<h2>'
+        detail += row.inv_year + ' ' + row.inv_make + ' '+ row.inv_model
+        detail += '</h2>'
+        detail += '<section class="veh_det">'
+        detail += '<div class="align">'
+        detail += '<img class="datailimages" src="' + row.inv_image + '" alt="Image of ' + row.inv_make + ' ' + row.inv_model + '">'
+        detail += '</div>'
+        detail += '<div>'
+        detail += '<h3 class="sub_heading">'
+        detail += row.inv_make + ' '+ row.inv_model +' Details'
+        detail += '</h3>'
+        detail += '<div class="div-cont">'
+        detail += '<h3 class="price"> Price: ' 
+        detail += '<span>$'
+        + new Intl.NumberFormat('en-US').format(row.inv_price) + '</span>'
+        detail += '</h3>'
+        detail += '<p>'
+        detail += '<h3 id="inline"> Description:  </h3>' + ' '
+        detail += row.inv_description
+        detail += '</p>'
+        detail += '<p>'
+        detail += '<h3 id="inlines"> Color: </h3>' +' '
+        detail += row.inv_color
+        detail += '</p>'
+        detail += '<p>'
+        detail += '<h3 id="inliness"> Miles: </h3>' +' '
+        detail += '<span>'
+        + new Intl.NumberFormat('en-US').format(row.inv_miles) + '</span>'
+        detail += '</p>'
+        detail += '</div>'
+        detail += '</div>'
+        detail += '</section>'
+    })
+    return detail
 }
 
 
