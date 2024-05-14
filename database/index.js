@@ -1,4 +1,4 @@
-const { query } = require("express")
+
 const { Pool } = require("pg")
 require("dotenv").config()
 /* **********************
