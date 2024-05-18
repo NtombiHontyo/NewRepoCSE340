@@ -118,6 +118,97 @@ h1 {
   background-color: aliceblue;
   padding: 10px;
 }
+/* login-form */
+
+.background {
+  width: 60%;
+  height: 40vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+}
+.background form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: blue;
+  font-weight: 500;
+  color: white;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.background label {
+  align-self: flex-start;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+.background input {
+  width: 80%;
+  height: 30px;
+}
+.background form a {
+  color: coral;
+}
+
+.background button {
+  border: 2px solid blue;
+  height: 25px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin: 5px;
+}
+/* Registration Page */
+#register-background {
+  background-color: #ADE0FF;
+  overflow: auto;
+}
+#register-form {
+  background-color: white;
+  color: black;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  padding-left: 20px;
+}
+#register-background h1 {
+  margin: 0;
+  padding-top: 20px;
+}
+#register-background input {
+  height: 45px;
+  width: 90%;
+  border: 2px solid black;;
+}
+#register-background label {
+font-weight: 700;
+margin-top: 20px;
+margin-bottom: 7px;
+}
+#register-background button {
+  width: 40%;
+  background-color: #1F4BFF;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 35px;
+}
+#register-background form {
+  margin: 20px;
+}
+#register-background p {
+  font-style: italic;
+  margin-right: 60px;
+  color: gray;
+}
+#register-background #requirement {
+  margin-right: 10px;
+  text-align: end;
+}
+
 @media only screen and (min-width: 64rem) {
   #background {
     display: block;
