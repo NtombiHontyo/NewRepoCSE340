@@ -122,7 +122,7 @@ h1 {
 
 .background {
   width: 60%;
-  height: 40vh;
+  height: 60vh;
   background-color: aqua;
   display: flex;
   justify-content: center;
@@ -144,8 +144,8 @@ h1 {
   margin-top: 15px;
 }
 .background input {
-  width: 80%;
-  height: 30px;
+ height: 45px;
+ width: 90%;
 }
 .background form a {
   color: coral;
@@ -199,7 +199,7 @@ margin-bottom: 7px;
 #register-background form {
   margin: 20px;
 }
-#register-background p {
+#register-background span, .background span {
   font-style: italic;
   margin-right: 60px;
   color: gray;
@@ -207,6 +207,12 @@ margin-bottom: 7px;
 #register-background #requirement {
   margin-right: 10px;
   text-align: end;
+}
+input:required:invalid, input:focus:invalid {
+  border-left: 3px solid red;
+}
+input:required:valid {
+  border-left: 3px solid green;
 }
 
 @media only screen and (min-width: 64rem) {
