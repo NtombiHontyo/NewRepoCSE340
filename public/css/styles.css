@@ -159,11 +159,11 @@ h1 {
   margin: 5px;
 }
 /* Registration Page */
-#register-background {
+.register-background {
   background-color: #ADE0FF;
   overflow: auto;
 }
-#register-form {
+.register-form {
   background-color: white;
   color: black;
   width: 48%;
@@ -172,21 +172,31 @@ h1 {
   border: 2px solid black;
   padding-left: 20px;
 }
-#register-background h1 {
+.register-background h1 {
   margin: 0;
   padding-top: 20px;
 }
-#register-background input {
+.register-background input {
   height: 45px;
   width: 90%;
-  border: 2px solid black;;
+  border: 2px solid black;
 }
-#register-background label {
+.register-background select {
+  height: 45px;
+  width: 90%;
+  border: 2px solid black;
+}
+.register-background textarea {
+  width: 90%;
+  height: 90px;
+  border: 2px solid black;
+}
+.register-background label {
 font-weight: 700;
 margin-top: 20px;
 margin-bottom: 7px;
 }
-#register-background button {
+.register-background button {
   width: 40%;
   background-color: #1F4BFF;
   color: white;
@@ -196,23 +206,81 @@ margin-bottom: 7px;
   margin-bottom: 20px;
   height: 35px;
 }
-#register-background form {
+.register-background form {
   margin: 20px;
 }
-#register-background span, .background span {
+.register-background span, .background span {
   font-style: italic;
   margin-right: 60px;
   color: gray;
 }
-#register-background #requirement {
+.requirement {
   margin-right: 10px;
   text-align: end;
+}
+select:required:invalid, input:focus:invalid {
+  border-left: 3px solid red;
 }
 input:required:invalid, input:focus:invalid {
   border-left: 3px solid red;
 }
+textarea:required:invalid, input:focus:invalid {
+  border-left: 3px solid red;
+}
 input:required:valid {
   border-left: 3px solid green;
+}
+select:required:valid {
+  border-left: 3px solid green;
+}
+textarea:required:valid {
+  border-left: 3px solid green;
+}
+.backgroundClassification {
+  width: 60%;
+  height: 60vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+}
+
+.backgroundClassification form {
+display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: blue;
+  font-weight: 500;
+  color: white;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.backgroundClassification label {
+  align-self: flex-start;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+.backgroundClassification input {
+ height: 45px;
+ width: 90%;
+}
+.backgroundClassification button {
+  border: 2px solid blue;
+  height: 25px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin: 5px;
+}
+
+/* InventoryForm CSS */
+.managementview a {
+  color: black;
+  padding-top: 10px;
+  font-size: 1.5rem;
+}
+.managementview  {
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (min-width: 64rem) {

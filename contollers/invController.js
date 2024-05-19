@@ -31,5 +31,13 @@ invCont.buildByInvId = async function (req, res, next) {
     })
 }
 
+//Build Vehicle Management Page
+invCont.buildVehicleManagement = async function (req, res) {
+    const nav = await utilities.getNav()
+    res.render("./inventory/management", {
+        title: "Vehicle Management",
+        nav
+    })
+}
 
 module.exports = invCont

@@ -17,6 +17,8 @@ const session = require("express-session")
 const pool = require('./database/')
 const account = require('./routes/accountRoute')
 const bodyParser = require("body-parser")
+const invCont = require("./contollers/invController")
+const vehicleManagement = require('./routes/vehicleManagementRoute')
 
 
 /* ********************
@@ -54,11 +56,15 @@ app.set("layout", "./layouts/layouts")
 app.use(static)
 // Index route
 app.get('/', utilities.handleErrors(baseController.buildHome))
+//Route to build Vehicle Management
+app.get("/inv", utilities.handleErrors(invCont.buildVehicleManagement))
 // Inventory routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv/", utilities.handleErrors(inventoryRoute))
 //app.use("../..", inventoryRoute)
 //route for account login
 app.use('/account', account)
+//route for addClassification page
+app.use('/vehicle', vehicleManagement)
 app.get('/error',  utilities.handleErrors(5/0))
 //File Not Found Route - must be the last route in the list
 app.use(async (req, res, next) => {

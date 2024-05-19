@@ -1,0 +1,17 @@
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+       <%  }) %>
+    </ul>
+    <% } %>
+    <h1><%= title %></h1>
+<div class="backgroundClassification">
+<form action="/vehicle/classification" method="post">
+    <p class="requirement">Classification must not contain spaces and special characters.</p>
+    <label for="classification_name">Classification Name </label> 
+    <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z]+$" > 
+    <button>Add</button>
+</form>
+</div>
