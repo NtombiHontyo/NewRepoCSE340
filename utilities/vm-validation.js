@@ -75,6 +75,19 @@ validate.addInventoryRules = () => {
         .isLength({ min: 2 })
         .withMessage("Please provide a vehicle description."),
 
+        body("inv_image")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide a vehicle image path"), //on error this message is sent.
+
+        body("inv_thumbnail")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide a vehicle image thumbnail path"),
+        
+
         body("inv_price")
         .trim()
         .notEmpty()
@@ -105,21 +118,23 @@ validate.addInventoryRules = () => {
  * Check data and return errors or continue to registration
  * ************************ */
 validate.checkInvData = async (req, res, next) => {
-    const { inv_make, inv_model, inv_year, inv_description,  inv_price,inv_miles, inv_color,classification_id} = req.body
+    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price,inv_miles, inv_color,classification_id} = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = utilities.getNav()
-        let classification = utilities.buildClassificationList
+        let classificationList = utilities.buildClassificationList
         res.render("inventory/addInventory", {
             errors,
             title: "Add Inventory",
             nav,
-            classification,
+            classificationList,
             inv_make, 
             inv_model, 
             inv_year, 
-            inv_description,  
+            inv_description ,
+            inv_image,
+            inv_thumbnail,  
             inv_price,
             inv_miles, 
             inv_color,

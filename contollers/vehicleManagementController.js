@@ -19,11 +19,11 @@ async function buildClassificationForm(req, res, next) {
  * ***************** */
 async function buildInventoryForm(req, res, next) {
     let nav = await utilities.getNav()
-    let classification = await utilities.buildClassificationList()
+    let classificationList = await utilities.buildClassificationList()
     res.render("inventory/addInventory", {
         title: "Add Inventory",
         nav,
-        classification,
+        classificationList,
         errors: null
     })
 }
@@ -64,13 +64,15 @@ async function addClassification(req, res){
  * ********************* */
 async function addInventory(req, res){
     let nav = await utilities.getNav()
-    let classification = await utilities.buildClassificationList()
-    const { inv_make, inv_model, inv_year, inv_description,  inv_price,inv_miles, inv_color,classification_id} = req.body
+    let classificationList = await utilities.buildClassificationList()
+    const { inv_make, inv_model, inv_year, inv_description,inv_image, inv_thumbnail,  inv_price,inv_miles, inv_color,classification_id} = req.body
     const regResult = await vmModel.addInventory(
         inv_make,
         inv_model,
         inv_year,
         inv_description,
+        inv_image, 
+        inv_thumbnail,
         inv_price,
         inv_miles,
         inv_color,
@@ -92,7 +94,7 @@ async function addInventory(req, res){
         res.status(501).render("inventory/addInventory", {
             title: "Add Inventory",
             nav,
-            classification,
+            classificationList,
             errors: null,
         })
     }

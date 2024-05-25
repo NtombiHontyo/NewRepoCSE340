@@ -19,6 +19,7 @@ const account = require('./routes/accountRoute')
 const bodyParser = require("body-parser")
 const invCont = require("./contollers/invController")
 const vehicleManagement = require('./routes/vehicleManagementRoute')
+const cookieParser = require("cookie-parser")
 
 
 /* ********************
@@ -43,6 +44,12 @@ app.use(function(req, res, next){
 })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+//Cookie Parser
+app.use(cookieParser())
+
+//JWT Token Middleware
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
