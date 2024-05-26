@@ -25,8 +25,9 @@ invCont.buildByInvId = async function (req, res, next) {
     const data = await invModel.getInvDetails(inv_id)
     const detail = await utilities.buildDetailPage(data)
     let nav = await utilities.getNav()
+    const titleName = data[0].inv_make
     res.render("./inventory/details", {
-        title: "Details",
+        title: "Details " + titleName,
         nav,
         detail
     })
@@ -61,28 +62,92 @@ invCont.getInventoryJSON = async (req, res, next) => {
  * Deliver pre-filled update inventory Form
  * ***************** */
 invCont.buildInvItemUpdateForm = async function(req, res, next) {
-    const invId = parseInt(req.params.inv_id)
+    const inv_id = parseInt(req.params.inv_id)
     let nav = await utilities.getNav()
-    const data = await invModel.getInvDetails(invId)
-    let classificationList = await utilities.buildClassificationList(data.classification_id)
-    const name = `${data.inv_make} ${data.inv_model}`
+    const itemdata = await invModel.getInvDetails(inv_id)
+    const classificationList = await utilities.buildClassificationList(itemdata[0].classification_id)
+    const itemname = `${itemdata[0].inv_make} ${itemdata[0].inv_model}`
     res.render("./inventory/edit-inventory", {
-        title: "Edit " + name,
+        title: "Edit " + itemname,
         nav,
         classificationList: classificationList,
         errors: null,
-        inv_id: data.inv_id,
-        inv_make: data.inv_make,
-        inv_model: data.inv_model,
-        inv_year: data.inv_year,
-        inv_desc: data.inv_description,
-        inv_image: data.inv_image,
-        inv_thumbnail: data.inv_thumbnail,
-        inv_price: data.inv_price,
-        inv_miles: data.inv_miles,
-        inv_color: data.inv_color,
-        classification_id: data.classification_id
+        inv_id: itemdata[0].inv_id,
+        inv_make: itemdata[0].inv_make,
+        inv_model: itemdata[0].inv_model,
+        inv_year: itemdata[0].inv_year,
+        inv_description: itemdata[0].inv_description,
+        inv_image: itemdata[0].inv_image,
+        inv_thumbnail: itemdata[0].inv_thumbnail,
+        inv_price: itemdata[0].inv_price,
+        inv_miles: itemdata[0].inv_miles,
+        inv_color: itemdata[0].inv_color,
+        classification_id: itemdata[0].classification_id
     })
 }
+
+/* ***********************
+ * Process update of inventory item
+ * ********************* */
+invCont.updateInventory = async function (req, res, next){
+    let nav = await utilities.getNav()
+    const { 
+        inv_id,
+        inv_make, 
+        inv_model, 
+        inv_description,
+        inv_image, 
+        inv_thumbnail, 
+        inv_year, 
+        inv_price, 
+        inv_miles, 
+        inv_color, 
+        classification_id,
+        } = req.body
+    const updateResult = await invModel.updateInventory(
+        inv_id,
+        inv_make, 
+        inv_model, 
+        inv_description,
+        inv_image, 
+        inv_thumbnail, 
+        inv_year, 
+        inv_price, 
+        inv_miles, 
+        inv_color, 
+        classification_id,
+    
+    )
+    if (updateResult) {
+        const itemname = updateResult.inv_make + " " + updateResult.inv_model
+        req.flash(
+            "notice", 
+            `The ${itemname} was successfully updated.`
+        )
+        res.redirect("/inv/")
+        
+    } else {
+        const classificationList = await utilities.buildClassificationList(classification_id)
+        const itemname = `${inv_make} ${inv_model}`
+        req.flash("notice", "Sorry, the insert failed.")
+        res.status(501).render("inventory/edit-inventory", {
+            title: "Edit " + itemname,
+            nav,
+            classificationList: classificationList,
+            errors: null,
+            inv_id,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image, 
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id
+        })
+    }
+ }
 
 module.exports = invCont

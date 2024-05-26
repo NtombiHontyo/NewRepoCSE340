@@ -7,7 +7,7 @@
     </ul>
     <% } %>
 <div class="register-background">
-<form action="/inv/update" method="post" class="register-form">
+<form action="/inv/update" method="post" class="register-form" id="edit-form">
 
     <h1><%= title %></h1>
 
@@ -20,7 +20,7 @@
     <input type="text" name="inv_model" id="inv_model" required value="<%= locals.inv_model %>">
 
     <label for="inv_description">Description</label>
-    <textarea name="inv_description" id="inv_description" required value="<%= locals.inv_description %>"></textarea>
+    <textarea name="inv_description" id="inv_description" required  value="<%= locals.inv_description %>"><%- locals.inv_description %></textarea>   
 
     <label for="inv_image">Image Path</label>
     <input type="text" name="inv_image" id="inv_image" required value="<%= locals.inv_image %>"> 
@@ -43,7 +43,12 @@
   
     <%- classificationList %>
 
-    <button type="submit">Update Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
+
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
 
 </form>
 </div>
+
+<script src="../../js/inv-update.js"></script>

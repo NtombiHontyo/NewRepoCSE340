@@ -63,7 +63,7 @@ Util.buildClassificationGrid = async function(data){
 
 Util.buildDetailPage = async function(data){
     let detail
-    data.rows.forEach((row) => {
+    data.forEach((row) => {
         detail = '<h2>'
         detail += row.inv_year + ' ' + row.inv_make + ' '+ row.inv_model
         detail += '</h2>'
