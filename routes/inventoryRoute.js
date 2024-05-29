@@ -22,4 +22,13 @@ router.post("/update/",
     classValidate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory))
 
+//Route to deliver the delete confirmation page
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildInvItemDeleteConfPage))
+
+//Route to process the deletion process
+router.post("/delete/", 
+    utilities.handleErrors(invController.deleteInventory))
+
+
+
 module.exports = router

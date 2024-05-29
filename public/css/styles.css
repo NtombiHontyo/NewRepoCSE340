@@ -287,6 +287,7 @@ button:disabled {
   background-color: aqua;
 }
 
+
 @media only screen and (min-width: 64rem) {
   #background {
     display: block;
