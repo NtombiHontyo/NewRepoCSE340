@@ -25,4 +25,14 @@ router.post(
     classValidate.checkInvData,
     utilities.handleErrors(vehicleManagementController.addInventory))
 
+//Route to deliver test drive page/form
+router.get("/test",utilities.handleErrors(vehicleManagementController.buildTestDriveForm))    
+
+//Route to process test drive Form
+router.post(
+    "/test", 
+    classValidate.addTestDriveDataRules(),
+    classValidate.checkTdData,
+    utilities.handleErrors(vehicleManagementController.addTestDriveDetails))
+
 module.exports = router

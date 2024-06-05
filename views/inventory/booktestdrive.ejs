@@ -1,0 +1,34 @@
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+       <%  }) %>
+    </ul>
+    <% } %>
+<div class="register-background">
+<form action="/vehicle/test" method="post" class="register-form">
+
+    <h1><%= title %></h1>
+
+    <p class="requirement">ALL FIELDS ARE REQUIRED.</p>
+
+    <label for="tdc_date">Date</label>
+    <input type="date" name="tdc_date" id="tdc_date" required value="<%= locals.tdc_date %>">
+
+    <label for="tdc_time">Time</label>
+    <input type="time" name="tdc_time" id="tdc_time" required value="<%= locals.tdc_time %>">
+
+    <label for="tdc_fullname">Full Name</label>
+    <input type="text" name="tdc_fullname" id="tdc_fullname" required value="<%= locals.tdc_fullname %>">
+
+    <label for="tdc_cellphone">Cellphone Number</label>
+    <input type="tel" name="tdc_cellphone" id="tdc_cellphone" required value="<%= locals.tdc_cellphone %>"> 
+    
+    <label for="tdc_make_model">Car Make and Model </label>
+    <input type="tel" name="tdc_make_model" id="tdc_make_model" required value="<%= locals.tdc_make_model %>"> 
+
+    <button>Book</button>
+
+</form>
+</div>

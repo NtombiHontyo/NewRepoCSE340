@@ -8,14 +8,14 @@
     </ul>
     <% } %>
 <div class="background">
-<form action="/account/login" method="post">
+<form action="/account/login" method="post" id="loginForm">
     <label for="account_email">Username: </label> 
     <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email %>">
     <label for="account_password" >Password</label> 
     <span>  Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</span>
     <input type="password" name="account_password" id="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s)(.{12,}$)"> 
-    <button id="loginButton">Login</button>
+    <button id="dOMButton">Login</button>
     <div>No account? <a href="/account/register">Register</a></div>
 </form>
 </div>
-<script src="../../js/account-header.js"></script>
+

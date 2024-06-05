@@ -100,6 +100,51 @@ async function addInventory(req, res){
     }
  }
 
+  
+/* ******************
+ * Deliver Test drive Form
+ * ***************** */
+async function buildTestDriveForm(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("inventory/booktestdrive", {
+        title: "Book a Test Drive",
+        nav,
+        errors: null
+    })
+}
 
 
-module.exports = {buildClassificationForm, addClassification, buildInventoryForm, addInventory}
+/* ***********************
+ * Process information of Test Drive
+ * ********************* */
+async function addTestDriveDetails(req, res){
+    let nav = await utilities.getNav()
+    const { tdc_date, tdc_time, tdc_fullname, tdc_cellphone,tdc_make_model} = req.body
+    const regResult = await vmModel.addTestDriveDetails(
+        tdc_date,
+        tdc_time,
+        tdc_fullname,
+        tdc_cellphone,
+        tdc_make_model 
+    )
+    if (regResult) {
+        req.flash(
+            "notice", 
+            `Congratulations, you have registered ${tdc_make_model} for a test drive. See you there!.`
+        )
+        res.status(201).render("index", {
+            title: "Home",
+            nav,
+           // errors: null,
+        })
+    } else {
+        req.flash("notice", "Sorry, the test drive application failed. Please try again.")
+        res.status(501).render("inventory/booktestdrive", {
+            title: "Book a Test Drive",
+            nav,
+            errors: null,
+        })
+    }
+ }
+
+module.exports = {buildClassificationForm, addClassification, buildInventoryForm, addInventory, buildTestDriveForm, addTestDriveDetails}

@@ -179,6 +179,72 @@ validate.checkUpdateData = async (req, res, next) => {
     next()
 }
 
+/* *************************
+ * Test Drive Data Validation Rules
+ * ************************ */
+validate.addTestDriveDataRules = () => {
+    return [
+        //make is required and must be string
+        body("tdc_date")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a date for the test drive."), //on error this message is sent.
+
+        //model is required and must be string
+        body("tdc_time")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide a time for the test drive."), // on error this message is sent
+
+        //Year
+        body("tdc_fullname")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide your full name."), // on error this message is sent,
+
+        body("tdc_cellphone")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide a cellphone number"), //on error this message is sent.
+
+        body("tdc_make_model")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage("Please provide a make and model of the vehicle"),
+        
+    ]
+}
+
+/* *************************
+ * Check data and return errors or continue to add inventory
+ * ************************ */
+validate.checkTdData = async (req, res, next) => {
+    const { tdc_date, tdc_time, tdc_fullname, tdc_cellphone,tdc_make_model} = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = utilities.getNav()
+        res.render("inventory/booktestdrive", {
+            errors,
+            title: "Book a Test Drive",
+            nav,
+            tdc_date, 
+            tdc_time, 
+            tdc_fullname, 
+            tdc_cellphone,
+            tdc_make_model
+        })
+        return
+    }
+    next()
+}
+
+
 
 
 module.exports = validate
